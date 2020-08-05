@@ -37,7 +37,9 @@
 RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(proximityEnabled:(BOOL)enabled) {
-  [[UIDevice currentDevice] setProximityMonitoringEnabled:enabled];
+  dispatch_sync(dispatch_get_main_queue(), ^{
+    [[UIDevice currentDevice] setProximityMonitoringEnabled:enabled];
+  });
 }
 
 @end
